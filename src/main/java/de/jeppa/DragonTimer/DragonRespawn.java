@@ -53,15 +53,15 @@ public class DragonRespawn implements Runnable {
     private EnderDragon BukkitNMSSpawn(final Location dragonSpawn)
             throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
         final SpawnReason spawnReason = SpawnReason.DEFAULT;
-        final Object CraftWorld_o = this.plugin.getCraftWorld(dragonSpawn.getWorld());
-        final Object entity = CraftWorld_o.getClass().getMethod("createEntity", Location.class, Class.class).invoke(CraftWorld_o,
-                dragonSpawn, EntityType.ENDER_DRAGON.getEntityClass());
+        final Object craftWorld = this.plugin.getCraftWorld(dragonSpawn.getWorld());
+        final Object entity = craftWorld.getClass().getMethod("createEntity", Location.class, Class.class).invoke(craftWorld, dragonSpawn,
+                EntityType.ENDER_DRAGON.getEntityClass());
         final EnderDragon dragon = (EnderDragon) entity.getClass().getMethod("getBukkitEntity").invoke(entity);
         this.setWerte(dragon);
 
         final Class<?> entClass = Class.forName("net.minecraft.world.entity.Entity");
 
-        CraftWorld_o.getClass().getMethod("addEntityToWorld", entClass, spawnReason.getClass()).invoke(CraftWorld_o, entity, spawnReason);
+        craftWorld.getClass().getMethod("addEntityToWorld", entClass, spawnReason.getClass()).invoke(craftWorld, entity, spawnReason);
         return dragon;
     }
 
@@ -71,7 +71,7 @@ public class DragonRespawn implements Runnable {
     }
 
     private void setDragonPosMeta(final EnderDragon dragon, final Location location) {
-        final FixedMetadataValue MdV_DragonLocation = new FixedMetadataValue(this.plugin, location);
-        dragon.setMetadata("DSL-Location", MdV_DragonLocation);
+        final FixedMetadataValue dragonLocation = new FixedMetadataValue(this.plugin, location);
+        dragon.setMetadata("DSL-Location", dragonLocation);
     }
 }

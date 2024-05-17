@@ -19,14 +19,14 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent event) {
-        final Player p = event.getPlayer();
-        final World TheWorld = p.getWorld();
-        final String Worldname = TheWorld.getName().toLowerCase();
-        if (!this.plugin.checkDSLWorld(Worldname) && this.plugin.checkWorld(Worldname)) {
-            final int maxCount = this.plugin.getMaxDragons(Worldname);
+        final Player player = event.getPlayer();
+        final World world = player.getWorld();
+        final String worldName = world.getName().toLowerCase();
+        if (!this.plugin.checkDSLWorld(worldName) && this.plugin.checkWorld(worldName)) {
+            final int maxCount = this.plugin.getMaxDragons(worldName);
             if (maxCount > 1) {
                 this.plugin.getServer().getScheduler().runTaskLater(this.plugin, () -> {
-                    final Collection<EnderDragon> EntityList = TheWorld.getEntitiesByClass(EnderDragon.class);
+                    final Collection<EnderDragon> EntityList = world.getEntitiesByClass(EnderDragon.class);
 
                     final Iterator<EnderDragon> iterator = EntityList.iterator();
                     while (iterator.hasNext()) {
@@ -39,22 +39,22 @@ public class PlayerListener implements Listener {
                 }, 110L);
             }
         }
-        this.plugin.getServer().getScheduler().runTaskLater(this.plugin, () -> this.plugin.setTimerdisplayToPlayer(p), 60L);
+        this.plugin.getServer().getScheduler().runTaskLater(this.plugin, () -> this.plugin.setTimerdisplayToPlayer(player), 60L);
     }
 
     @EventHandler
     public void worldChange(final PlayerChangedWorldEvent event) {
-        final Player p = event.getPlayer();
-        final String ThisWorld = event.getFrom().getName();
-        if (this.plugin.checkWorld(ThisWorld)) {
-            if (!this.plugin.checkDSLWorld(ThisWorld.toLowerCase())) {
-                this.plugin.deletePlayersBossBars(p);
+        final Player player = event.getPlayer();
+        final String world = event.getFrom().getName();
+        if (this.plugin.checkWorld(world)) {
+            if (!this.plugin.checkDSLWorld(world.toLowerCase())) {
+                this.plugin.deletePlayersBossBars(player);
             }
-            this.plugin.delTimerdisplayFromPlayer(p);
+            this.plugin.delTimerdisplayFromPlayer(player);
         }
-        final String TogoWorld = p.getWorld().getName().toLowerCase();
+        final String TogoWorld = player.getWorld().getName().toLowerCase();
         if (this.plugin.checkWorld(TogoWorld)) {
-            this.plugin.setTimerdisplayToPlayer(p);
+            this.plugin.setTimerdisplayToPlayer(player);
         }
     }
 }

@@ -34,7 +34,6 @@ import org.bukkit.craftbukkit.entity.CraftEnderDragon;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -50,12 +49,12 @@ public class DragonTimer extends JavaPlugin {
     DragonEvents dragonListener;
     PlayerListener playerListener;
     DragonCommands dragonCommandExecutor;
-    static Economy econ;
+    static Economy Vault;
     public File ConfigFile;
     boolean PAPIenabled;
     boolean MinVersion19;
-    boolean spigot;
-    private boolean dsl;
+    boolean isSpigot;
+    private boolean hasDragonSlayer;
     String[] spawnTimeStrings;
     HashMap<String, String[]> SpawnTimerMap;
     HashMap<String, Scoreboard> timerDisplays;
@@ -67,12 +66,12 @@ public class DragonTimer extends JavaPlugin {
     Field DragonKilled;
     Field EnumDragonRespawn;
     Method RespawnMethod;
-    Plugin dsl_p;
-    Method dslCheckWorld_m;
-    Method dslStartRefresh_m;
+    DragonSlayer DragonSlayerPlugin;
+    Method DragonSlayerCheckWorld;
+    Method DragonSlayerStartRefresh;
     Method getDragonlist;
-    int RunCounter;
-    int wasrunning;
+    int runCounter;
+    int wasRunning;
 
     private static int Sub;
     Method getEDBMethod;
@@ -81,7 +80,7 @@ public class DragonTimer extends JavaPlugin {
     boolean debugOn;
 
     static {
-        DragonTimer.econ = null;
+        DragonTimer.Vault = null;
         DragonTimer.Sub = -1;
     }
 
@@ -93,8 +92,8 @@ public class DragonTimer extends JavaPlugin {
         this.ConfigFile = null;
         this.PAPIenabled = false;
         this.MinVersion19 = false;
-        this.spigot = false;
-        this.dsl = false;
+        this.isSpigot = false;
+        this.hasDragonSlayer = false;
         this.spawnTimeStrings = null;
         this.SpawnTimerMap = new HashMap<String, String[]>();
         this.timerDisplays = new HashMap<String, Scoreboard>();
@@ -106,12 +105,12 @@ public class DragonTimer extends JavaPlugin {
         this.DragonKilled = null;
         this.EnumDragonRespawn = null;
         this.RespawnMethod = null;
-        this.dsl_p = null;
-        this.dslCheckWorld_m = null;
-        this.dslStartRefresh_m = null;
+        this.DragonSlayerPlugin = null;
+        this.DragonSlayerCheckWorld = null;
+        this.DragonSlayerStartRefresh = null;
         this.getDragonlist = null;
-        this.RunCounter = 0;
-        this.wasrunning = 99;
+        this.runCounter = 0;
+        this.wasRunning = 99;
         this.getEDBMethod = null;
         this.CraftWorldClass = null;
         this.CraftEnderDragonClass = null;
@@ -123,11 +122,11 @@ public class DragonTimer extends JavaPlugin {
         DragonTimer.getVersion();
         this.PlaceholderApi();
 
-        if (this.dsl_p == null) {
-            this.dsl_p = Bukkit.getServer().getPluginManager().getPlugin("DragonSlayer");
+        if (this.DragonSlayerPlugin == null) {
+            this.DragonSlayerPlugin = (DragonSlayer) Bukkit.getServer().getPluginManager().getPlugin("DragonSlayer");
         }
-        if (this.dsl_p != null) {
-            this.dsl = true;
+        if (this.DragonSlayerPlugin != null) {
+            this.hasDragonSlayer = true;
             this.getLogger().info("DragonSlayer found, will be used!");
         }
         try {
@@ -139,7 +138,7 @@ public class DragonTimer extends JavaPlugin {
         }
         try {
             Class.forName("org.spigotmc.SpigotConfig");
-            this.spigot = true;
+            this.isSpigot = true;
         } catch (final NoClassDefFoundError | ClassNotFoundException ex2) {
             this.logger.severe("org.spigotmc.SpigotConfig not found, disabling");
             this.getServer().getPluginManager().disablePlugin(this);
@@ -209,8 +208,8 @@ public class DragonTimer extends JavaPlugin {
 
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
             final Calendar now = Calendar.getInstance();
-            if (now.get(13) == 0 || (now.get(13) > 0 && this.wasrunning != now.get(12))) {
-                this.wasrunning = now.get(12);
+            if (now.get(13) == 0 || (now.get(13) > 0 && this.wasRunning != now.get(12))) {
+                this.wasRunning = now.get(12);
 
                 final Iterator<String> iterator = this.getMaplist().iterator();
                 while (iterator.hasNext()) {
@@ -231,7 +230,7 @@ public class DragonTimer extends JavaPlugin {
                                     }
                                     final int refreshDelay = this.getRefreshDelay(Mapname);
                                     if (this.getDSL() && this.MinVersion19 && refreshDelay >= 0) {
-                                        ((DragonSlayer) this.dsl_p).WorldRefresh(Mapname);
+                                        ((DragonSlayer) this.DragonSlayerPlugin).WorldRefresh(Mapname);
                                         final int missD = MissingDrags;
                                         this.getServer().getScheduler().runTaskLater(this, () -> this.SpawnXDragons(missD, Mapname),
                                                 refreshDelay * 1200);
@@ -275,7 +274,7 @@ public class DragonTimer extends JavaPlugin {
                         if (Playercount2 > 0 && Playercount2 < minpl2) {
                             final int DragsAlive = this.getDragonCount(Mapname);
                             final int MissingDrags2 = this.getMaxDragons(Mapname) - DragsAlive;
-                            if (MissingDrags2 > 0 && this.RunCounter == 1) {
+                            if (MissingDrags2 > 0 && this.runCounter == 1) {
 
                                 final Iterator<Player> iterator3 = Players2.iterator();
                                 while (iterator3.hasNext()) {
@@ -292,9 +291,9 @@ public class DragonTimer extends JavaPlugin {
                                 this.RemoveDelay(Mapname);
                             }
                         }
-                        ++this.RunCounter;
-                        if (this.RunCounter >= 11) {
-                            this.RunCounter = 0;
+                        ++this.runCounter;
+                        if (this.runCounter >= 11) {
+                            this.runCounter = 0;
                         } else {
                             continue;
                         }
@@ -383,7 +382,7 @@ public class DragonTimer extends JavaPlugin {
     public double getDragonHealth(final String Mapname) {
         final double h = this.getConfigDouble(Mapname, "health");
         double maxH = 2048.0;
-        if (this.spigot) {
+        if (this.isSpigot) {
             maxH = Bukkit.spigot().getConfig().getInt("settings.attribute.maxHealth.max");
         }
         if (h > 0.0 && h <= maxH) {
@@ -453,8 +452,8 @@ public class DragonTimer extends JavaPlugin {
         final Location DragSpawnPos = this.getDragonSpawn(Mapname);
         final World MyWorld = this.getDragonWorldFromString(Mapname);
         Collection<EnderDragon> dragons = null;
-        if (this.dsl) {
-            dragons = ((DragonSlayer) this.dsl_p).getDragonList(MyWorld, Mapname);
+        if (this.hasDragonSlayer) {
+            dragons = ((DragonSlayer) this.DragonSlayerPlugin).getDragonList(MyWorld, Mapname);
         }
         if (dragons == null) {
             this.activateChunksAroundPosition(DragSpawnPos, MyWorld, 12);
@@ -463,7 +462,7 @@ public class DragonTimer extends JavaPlugin {
         boolean found = false;
         for (final EnderDragon dragon : dragons) {
             this.OrigEnderDragonSetKilled(dragon, true);
-            if (this.dsl) {
+            if (this.hasDragonSlayer) {
                 DragonSlayer.resetDragonsBossbar(dragon);
                 dragon.remove();
             } else {
@@ -713,12 +712,12 @@ public class DragonTimer extends JavaPlugin {
 
     public boolean checkWorld(final String World) { return this.getMaplist().contains(World.toLowerCase()); }
 
-    boolean getDSL() { return this.dsl; }
+    boolean getDSL() { return this.hasDragonSlayer; }
 
     boolean checkDSLWorld(final String World) {
         boolean check = false;
-        if (this.dsl && this.MinVersion19) {
-            check = ((DragonSlayer) this.dsl_p).checkWorld(World);
+        if (this.hasDragonSlayer && this.MinVersion19) {
+            check = ((DragonSlayer) this.DragonSlayerPlugin).checkWorld(World);
         }
         return check;
     }
