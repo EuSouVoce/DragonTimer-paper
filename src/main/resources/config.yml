@@ -1,0 +1,53 @@
+# #################### #
+# Dragon Timer v1.5.10 #
+# #################### #
+# ------------------------------------------------------------------------------------------ #
+# here are some infos about the sections in this config:                                     #
+#                                                                                            #
+# dragon._default: Here are some defaults that will be used for newly added worlds           #
+# global: This are global values...                                                          #
+# messages: you can use placeholders in here: $world, $dragon, $baseworld                    #
+# spawnpoint: here are the spawnpoints for the worlds the plugin is working in               #
+# ------------------------------------------------------------------------------------------ #
+# in 'command' you can use placeholders $player, $dragon and $world                          #
+# you can run multiple commands by separating them with a ;                                  #
+# ------------------------------------------------------------------------------------------ #
+# in timertext and timerline you can use placeholders $hours, $minutes and $seconds          #
+# if timerline is empty it will show some defaults.                                          #
+# ########################################################################################## #
+
+# 
+dragon:
+  _default:
+    name: '&5Smaug&r'
+    maxdragons: 1
+    minplayers: 1
+    health: 200
+    removedragons: false
+    timelimit: 0
+    removedelay: 3
+    command: 'ping'
+    noguarding: false
+    spawntimes: '12:00,13:00,14:00,15:00'
+    onebyone: false
+    timerdisplay: true
+    darkness: false
+    dsl_refreshdelay: -1 # -1 = off
+global:
+  debug: false
+  keepchunks: true
+
+# Messages - placeholders you can use: $world, $dragon
+messages:
+  notenoughplayers: 'There are not enough players on map $world to spawn dragons! There should be at least $minplayers players!'
+  dragonstospawn: 'There is a dragonrespawn ongoing! It will spawn $amount new dragons in world $world! (with $delay minutes delay)'
+  dragonsremwarn: 'Dragons in world $world may be removed in $removedelay minutes because of too few players!'
+  dragonsremoved: 'Dragons in world $world have been removed because of too few players!'
+  timelimitwarn: 'Hurry up! Dragons in world $world may be removed in $removedelay minutes! Battletime is almost over!'
+  timelimit: 'Dragons in world $world have been removed! You did not finish the fight!'
+  timertext: 'Respawn in:' # 'Next Respawn: $hours:$minutes'
+  timerline: '$hours : $minutes :'
+  notimer_ph: 'not yet'
+
+# Here are the spawnpoints for the worlds the plugin is working in :
+spawnpoint: []

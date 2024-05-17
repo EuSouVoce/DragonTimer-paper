@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>bytecode.space</id>
+      <url>https://repo.bytecode.space/repository/maven-public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+  <groupId>de.jeppa.DragonTimer</groupId>
+  <artifactId>DragonTimer</artifactId>
+  <version>1.6.0</version>
+
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <repositories>
+    <!-- Repositórios -->
+    <repository>
+      <id>dmulloy2-repo</id>
+      <url>https://repo.dmulloy2.net/repository/public/</url>
+    </repository>
+    <repository>
+      <id>OnARandomBox</id>
+      <url>https://repo.onarandombox.com/content/groups/public/</url>
+    </repository>
+    <repository>
+      <id>spigot-repo</id>
+      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    </repository>
+    <repository>
+      <id>oss-sonatype</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+    <repository>
+      <id>roinujnosde-repo</id>
+      <url>https://repo.roinujnosde.me/releases/</url>
+    </repository>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+    <repository>
+      <id>placeholderapi</id>
+      <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+    </repository>
+    <repository>
+      <id>iridiumdevelopment</id>
+      <url>https://nexus.iridiumdevelopment.net/repository/maven-releases/</url>
+    </repository>
+
+    <repository>
+      <id>minecraft-repo</id>
+      <url>https://libraries.minecraft.net/</url>
+    </repository>
+  </repositories>
+
+
+  <!-- Dependências -->
+  <dependencies>
+
+    <dependency>
+      <groupId>de.jeppa.DragonSlayer</groupId>
+      <artifactId>DragonSlayer</artifactId>
+      <version>0.13</version>
+      <systemPath>${project.build.directory}/../Libs/DragonSlayer-0.13.jar</systemPath>
+      <scope>system</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.comphenix.protocol</groupId>
+      <artifactId>ProtocolLib</artifactId>
+      <version>5.2.0-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>ca.bkaw.nms</groupId>
+      <artifactId>dev-bundle</artifactId>
+      <version>1.20.6-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot-api</artifactId>
+      <version>1.20.6-R0.1-SNAPSHOT</version>
+      <scope>provided</scope> 
+    </dependency> -->
+    <dependency>
+      <groupId>com.onarandombox.multiversecore</groupId>
+      <artifactId>Multiverse-Core</artifactId>
+      <version>4.3.12</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.mojang</groupId>
+      <artifactId>authlib</artifactId>
+      <version>6.0.52</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.github.timderspieler</groupId>
+      <artifactId>DeluxeCombat-API</artifactId>
+      <version>1.3.3</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>imperio.games.eventos</groupId>
+      <artifactId>shaded</artifactId>
+      <version>0.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.MilkBowl</groupId>
+      <artifactId>VaultAPI</artifactId>
+      <version>1.7.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>3.0.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.md-5</groupId>
+      <artifactId>bungeecord-api</artifactId>
+      <version>1.20-R0.2-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>me.clip</groupId>
+      <artifactId>placeholderapi</artifactId>
+      <version>2.11.5</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>5.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>ca.bkaw</groupId>
+        <artifactId>paper-nms-maven-plugin</artifactId>
+        <version>1.4.3</version>
+
+        <executions>
+
+          <execution>
+
+            <phase>process-classes</phase>
+            <goals>
+              <goal>remap</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <devBundle>
+            <!-- The artifact id of the resulting dependency -->
+            <id>dev-bundle</id>
+            <!-- The repository to download the dev-bundle from -->
+            <repository>
+              <id>myrepo</id>
+              <url>https://repo.papermc.io/repository/maven-public/</url>
+            </repository>
+            <!-- The artifact to download -->
+            <artifact>
+              <groupId>io.papermc.paper</groupId>
+              <artifactId>dev-bundle</artifactId>
+              <version>1.20.6-R0.1-20240510.191506-39</version>
+              <!-- ${gameVersion} will be replaced with the game version to use -->
+            </artifact>
+          </devBundle>
+        </configuration>
+
+      </plugin>
+      <!-- clean lifecycle, see
+      https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.1.0</version>
+      </plugin>
+      <!-- default lifecycle, jar packaging: see
+      https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.0.2</version>
+      </plugin>
+      <!-- Sets the Java version to 21 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>21</source>
+          <target>21</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.1</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <paperweight-mappings-namespace>mojang</paperweight-mappings-namespace>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifestEntries>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/../</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>custom-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>C:\Users\EuSouVoce\Desktop\testserver\plugins</outputDirectory>
+              <classifier>custom</classifier>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>2.5.2</version>
+      </plugin>
+
+      <!-- site lifecycle, see
+      https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

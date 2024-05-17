@@ -1,0 +1,37 @@
+name: DragonTimer
+authors:
+  - "EuSouVoce"
+  - "Jeppa"
+main: de.jeppa.DragonTimer.DragonTimer
+version: 1.6.0
+api-version: 1.13
+softdepend: [DragonSlayer,PlaceholderAPI,CrackShot]
+website: http://www.spigotmc.org/resources/dragontimer.69293/
+
+commands:
+  dragontimer:
+    aliases: ['dtimer', 'dti']
+    description: Begin of all dragontimer commands.
+    permission-message: I'm sorry, but you do not have permission to perform this command.
+
+permissions:
+  dragontimer.admin:
+    description: /dragontimer admin permission
+    default: false
+  dragontimer.info:
+    description: /dragontimer info permission
+    default: false
+  dragontimer.forcerespawn:
+    description: /dragontimer forcerespawn permission
+    default: false
+  dragontimer:
+    description: /dragontimer default permission
+    default: true
+  dragontimer.*:
+    description: all permissions
+    default: op
+    children:
+      dragontimer.admin: true
+      dragontimer.info: true
+      dragontimer.forcerespawn: true
+      dragontimer: true
