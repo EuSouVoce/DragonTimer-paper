@@ -5,12 +5,12 @@ authors:
 main: de.jeppa.DragonTimer.DragonTimer
 version: 1.6.0
 api-version: 1.13
-softdepend: [DragonSlayer,PlaceholderAPI,CrackShot]
+softdepend: [DragonSlayer, PlaceholderAPI, CrackShot]
 website: http://www.spigotmc.org/resources/dragontimer.69293/
 
 commands:
   dragontimer:
-    aliases: ['dtimer', 'dti']
+    aliases: ["dtimer", "dti"]
     description: Begin of all dragontimer commands.
     permission-message: I'm sorry, but you do not have permission to perform this command.
 

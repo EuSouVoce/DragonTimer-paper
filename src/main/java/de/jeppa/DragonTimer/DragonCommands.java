@@ -1,4 +1,4 @@
-// Class Version: 8
+
 package de.jeppa.DragonTimer;
 
 import java.util.Arrays;

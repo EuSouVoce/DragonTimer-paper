@@ -16,19 +16,19 @@
 # if timerline is empty it will show some defaults.                                          #
 # ########################################################################################## #
 
-# 
+#
 dragon:
   _default:
-    name: '&5Smaug&r'
+    name: "&5Smaug&r"
     maxdragons: 1
     minplayers: 1
     health: 200
     removedragons: false
     timelimit: 0
     removedelay: 3
-    command: 'ping'
+    command: "ping"
     noguarding: false
-    spawntimes: '12:00,13:00,14:00,15:00'
+    spawntimes: "12:00,13:00,14:00,15:00"
     onebyone: false
     timerdisplay: true
     darkness: false
@@ -39,15 +39,15 @@ global:
 
 # Messages - placeholders you can use: $world, $dragon
 messages:
-  notenoughplayers: 'There are not enough players on map $world to spawn dragons! There should be at least $minplayers players!'
-  dragonstospawn: 'There is a dragonrespawn ongoing! It will spawn $amount new dragons in world $world! (with $delay minutes delay)'
-  dragonsremwarn: 'Dragons in world $world may be removed in $removedelay minutes because of too few players!'
-  dragonsremoved: 'Dragons in world $world have been removed because of too few players!'
-  timelimitwarn: 'Hurry up! Dragons in world $world may be removed in $removedelay minutes! Battletime is almost over!'
-  timelimit: 'Dragons in world $world have been removed! You did not finish the fight!'
-  timertext: 'Respawn in:' # 'Next Respawn: $hours:$minutes'
-  timerline: '$hours : $minutes :'
-  notimer_ph: 'not yet'
+  notenoughplayers: "There are not enough players on map $world to spawn dragons! There should be at least $minplayers players!"
+  dragonstospawn: "There is a dragonrespawn ongoing! It will spawn $amount new dragons in world $world! (with $delay minutes delay)"
+  dragonsremwarn: "Dragons in world $world may be removed in $removedelay minutes because of too few players!"
+  dragonsremoved: "Dragons in world $world have been removed because of too few players!"
+  timelimitwarn: "Hurry up! Dragons in world $world may be removed in $removedelay minutes! Battletime is almost over!"
+  timelimit: "Dragons in world $world have been removed! You did not finish the fight!"
+  timertext: "Respawn in:" # 'Next Respawn: $hours:$minutes'
+  timerline: "$hours : $minutes :"
+  notimer_ph: "not yet"
 
 # Here are the spawnpoints for the worlds the plugin is working in :
 spawnpoint: []
